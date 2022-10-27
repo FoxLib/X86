@@ -1,0 +1,132 @@
+<html>
+<head>
+    <title>Список инструкций</title>
+    <meta charset="utf8"/>
+</head>
+<style>
+    * { font-size: 16px; font-family: "Ubuntu Mono", Monospace; }
+    table { border-collapse: collapse; }
+    td > b { font-weight: bold; display: block; }
+    h1 { font-size: 1.6em; }
+    th { background: #eee; }
+    tr { vertical-align: top; }
+    .pm { color: #c00; }
+    .done { background: #cfc; }
+    td small { color: #888; font-size: 0.9em; font-weight: normal; }
+</style>
+<body>
+</body>
+<table cellpadding="8" cellspacing="0" border="1">
+    <tr><th width="32"></th><th width="64">+0</th><th width="64">+1</th><th width="64">+2</th><th width="64">+3</th><th width="64">+4</th><th width="64">+5</th><th width="64">+6</th><th width="64">+7</th></tr>
+    <tr>
+        <th>00</th>
+        <td class="done"><b>MOV <small>3T</small></b>ra,rb</td>
+        <td class="done"><b>MOV <small>6T</small></b>ra,u32</td>
+        <td class="done"><b>MOVU <small>3T</small></b>ra,u8</td>
+        <td class="done"><b>MOVS <small>3T</small></b>ra,s8</td>
+        <td class="done"><b>MOVB <small>4T</small></b></b>ra,[rb]</td>
+        <td class="done"><b>MOVD <small>7T</small></b>ra,[rb]</td>
+        <td class="done"><b>MOVB <small>5T</small></b>[rb],ra</td>
+        <td class="done"><b>MOVD <small>8T</small></b>[rb],ra</td>
+    </tr>
+    <tr>
+        <th>08</th>
+        <td class="done"><b>PUSH</b>ra</td>
+        <td class="done"><b>POP</b>ra</td>
+        <td class="done"><b>PUSHB</b>u8</td>
+        <td class="done"><b>PUSH</b>u32</td>
+        <td class="done"><b title="Массовое сохранение в стек регистров">PUSH</b>ra-rb</td>
+        <td class="done"><b title="Массовое восстановление регистров из стека">POP</b>rb-ra</td>
+        <td class="done"><b>MOV</b>ra,[sp+s8]</td>
+        <td class="done"><b>MOV</b>[sp+s8],ra</td>
+    </tr>
+    <tr>
+        <th>10</th>
+        <td class="done"><b>JMP</b>s16</td>
+        <td class="done"><b>JMP</b>ra</td>
+        <td class="done"><b>CALL</b>s16</td>
+        <td class="done"><b>CALL</b>ra</td>
+        <td class="done"><b>RET</b></td>
+        <td class="done"><b>RET</b>u8</td>
+        <td class="done"><b>MOV</b>ra,sp</td>
+        <td class="done"><b>MOV</b>sp,ra</td>        
+    </tr>
+    <tr>
+        <th>18</th>
+        <td class="done"><b>JNZ <small>1/2T</small></b>s8</td>
+        <td class="done"><b>JZ <small>1/2T</small></b>s8</td>
+        <td class="done"><b>JNC <small>1/2T</small></b>s8</td>
+        <td class="done"><b>JC <small>1/2T</small></b>s8</td>
+        <td class="done"><b>JNS <small>1/2T</small></b>s8</td>
+        <td class="done"><b>JS <small>1/2T</small></b>s8</td>
+        <td class="done"><b>JNO <small>1/2T</small></b>s8</td>
+        <td class="done"><b>JO <small>1/2T</small></b>s8</td>
+    </tr>
+    <tr>
+        <th>20</th>
+        <td class="done"><b>ADD <small>4T</small></b>ra,rb,rc</td>
+        <td class="done"><b>ADC <small>4T</small></b>ra,rb,rc</td>
+        <td class="done"><b>SUB <small>4T</small></b>ra,rb,rc</td>
+        <td class="done"><b>SBC <small>4T</small></b>ra,rb,rc</td>
+        <td class="done"><b>AND <small>4T</small></b>ra,rb,rc</td>
+        <td class="done"><b>XOR <small>4T</small></b>ra,rb,rc</td>
+        <td class="done"><b>OR <small>4T</small></b>ra,rb,rc</td>
+        <td class="done"><b>CMP <small>4T</small></b>ra,rb,rc</td>
+    </tr>
+    <tr>
+        <th>28</th>
+        <td class="done"><b>ADD</b>ra,u32</td>
+        <td class="done"><b>ADC</b>ra,u32</td>
+        <td class="done"><b>SUB</b>ra,u32</td>
+        <td class="done"><b>SBC</b>ra,u32</td>
+        <td class="done"><b>AND</b>ra,u32</td>
+        <td class="done"><b>XOR</b>ra,u32</td>
+        <td class="done"><b>OR</b>ra,u32</td>
+        <td class="done"><b>CMP</b>ra,u32</td>
+    </tr>
+    <tr>
+        <th>30</th>
+        <td class="done"><b>ADDB</b>ra,s8</td>
+        <td class="done"><b>ADCB</b>ra,s8</td>
+        <td class="done"><b>SUBB</b>ra,s8</td>
+        <td class="done"><b>SBCB</b>ra,s8</td>
+        <td class="done"><b>ANDB</b>ra,s8</td>
+        <td class="done"><b>XORB</b>ra,s8</td>
+        <td class="done"><b>ORB</b>ra,s8</td>
+        <td class="done"><b>CMPB</b>ra,s8</td>
+    </tr>
+    <tr>
+        <th>38</th>
+        <td class="done"><b>SHR</b>ra,rb</td>
+        <td class="done"><b>SAR</b>ra,rb</td>
+        <td class="done"><b>SHL</b>ra,rb</td>
+        <td class="done"><b>ROR</b>ra,rb</td>
+        <td class="done"><b>SHR</b>ra,u8</td>
+        <td class="done"><b>SAR</b>ra,u8</td>
+        <td class="done"><b>SHL</b>ra,u8</td>
+        <td class="done"><b>ROR</b>ra,u8</td>
+    </tr>
+    <tr>
+        <th>40</th>
+        <td class="done"><b>MUL</b>ra,rb</td>
+        <td><b>MUL</b>ra,u32</td>
+        <td><b>DIV</b>ra,rb</td>
+        <td><b>IDIV</b>ra,rb,rc</td>
+        <td><b>PUSHF</b></td>
+        <td><b>POPF</b></td>
+        <td><b>PUSH</b>[sp+s8]</td>
+        <td><b>POP</b>[sp+s8]</td>
+    </tr>
+    <tr>
+        <th>48</th>
+        <td><b class="pm" title="Задать базу и лимит us">LIMIT</b>ra,rb,rc</td>
+        <td><b class="pm" title="Вход в режим ra (0 или 1)">ENTER</b>i8</td>
+        <td><b class="pm" title="Выгрузить регистры us в память ra">EXPORT</b></td>
+        <td><b class="pm" title="Загрузить регистры us из памяти ra">IMPORT</b></td>
+        <td><b class="pm" title="Адрес таблицы прерываний">INTERRUPT</b>ra</td>
+        <td><b class="pm" title="Загрузка адреса стека для us">LOADSP</b>ra</td>
+        <td><b class="pm" title="Переместить rc байт памяти из rb в ra">MOVSB</b>ra,rb,rc</td>
+        <td><b></b></td>        
+    </tr>
+</table>
+</html>

@@ -1,0 +1,105 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Tue May 10 07:58:14 2022
+[*]
+[dumpfile] "/home/fox/dev/my86/trunk/cpu32/tb.vcd"
+[dumpfile_mtime] "Tue May 10 07:57:13 2022"
+[dumpfile_size] 107414
+[savefile] "/home/fox/dev/my86/trunk/cpu32/tb.gtkw"
+[timestart] 3175
+[size] 1920 1027
+[pos] -1 -1
+*-8.000000 4254 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb.
+[sst_width] 248
+[signals_width] 276
+[sst_expanded] 1
+[sst_vpaned_height] 298
+@28
+tb.clock
+tb.core88_inst.clock
+@800200
+-IO
+-STATE
+@22
+[color] 2
+tb.core88_inst.mode[3:0]
+[color] 2
+tb.core88_inst.tstate[3:0]
+[color] 2
+tb.core88_inst.estate[4:0]
+@1000200
+-STATE
+@28
+tb.core88_inst.sel
+@22
+tb.core88_inst.address[19:0]
+tb.core88_inst.bus[7:0]
+tb.core88_inst.opcode[8:0]
+@1000200
+-IO
+@800200
+-REG
+@22
+[color] 5
+tb.core88_inst.eax[31:0]
+[color] 5
+tb.core88_inst.ebx[31:0]
+[color] 5
+tb.core88_inst.ecx[31:0]
+[color] 5
+tb.core88_inst.edx[31:0]
+[color] 5
+tb.core88_inst.esp[31:0]
+[color] 5
+tb.core88_inst.ebp[31:0]
+[color] 5
+tb.core88_inst.esi[31:0]
+[color] 5
+tb.core88_inst.edi[31:0]
+@c00200
+-SEG
+@22
+[color] 7
+tb.core88_inst.seg_cs[15:0]
+[color] 7
+tb.core88_inst.seg_ds[15:0]
+[color] 7
+tb.core88_inst.seg_fs[15:0]
+[color] 7
+tb.core88_inst.seg_gs[15:0]
+[color] 7
+tb.core88_inst.seg_es[15:0]
+[color] 7
+tb.core88_inst.seg_ss[15:0]
+@1401200
+-SEG
+@1000200
+-REG
+@800200
+-PORT
+@28
+[color] 3
+tb.port_clk
+[color] 3
+tb.port_w
+@22
+[color] 5
+tb.port[15:0]
+[color] 5
+tb.port_i[7:0]
+[color] 5
+tb.port_o[7:0]
+@1000200
+-PORT
+@800200
+-SDEMUL
+@28
+tb.sd_emul_inst.SPI_CS
+tb.sd_emul_inst.SPI_MISO
+tb.sd_emul_inst.SPI_MOSI
+tb.sd_emul_inst.SPI_SCLK
+@1000200
+-SDEMUL
+[pattern_trace] 1
+[pattern_trace] 0

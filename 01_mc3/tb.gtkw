@@ -1,0 +1,71 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Sun Sep 25 03:29:29 2022
+[*]
+[dumpfile] "e:\dev\x86\01_mc3\tb.vcd"
+[dumpfile_mtime] "Sun Sep 25 03:28:52 2022"
+[dumpfile_size] 59511
+[savefile] "e:\dev\x86\01_mc3\tb.gtkw"
+[timestart] 0
+[size] 960 491
+[pos] -1 -1
+*-7.000000 180 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb.
+[sst_width] 197
+[signals_width] 168
+[sst_expanded] 1
+[sst_vpaned_height] 115
+@28
+[color] 2
+tb.clock_25
+[color] 3
+tb.clock
+@29
+[color] 2
+tb.Core8.bus
+@22
+tb.Core8.fn[4:0]
+@800200
+-IO
+@22
+tb.Core8.address[15:0]
+tb.Core8.ea[15:0]
+tb.Core8.in[7:0]
+tb.Core8.out[7:0]
+@28
+tb.Core8.we
+@1000200
+-IO
+@c00200
+-REGS
+@22
+[color] 5
+tb.Core8.ax[15:0]
+[color] 5
+tb.Core8.bx[15:0]
+[color] 5
+tb.Core8.cx[15:0]
+[color] 5
+tb.Core8.dx[15:0]
+[color] 5
+tb.Core8.sp[15:0]
+[color] 5
+tb.Core8.bp[15:0]
+[color] 5
+tb.Core8.si[15:0]
+[color] 5
+tb.Core8.di[15:0]
+@1401200
+-REGS
+@800200
+-ALU
+@28
+tb.Core8.alu[2:0]
+@22
+tb.Core8.op1[15:0]
+tb.Core8.op2[15:0]
+tb.Core8.flags[11:0]
+@1000200
+-ALU
+[pattern_trace] 1
+[pattern_trace] 0

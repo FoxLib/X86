@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOCx86</title>
+    <meta charset="utf8"/>
+    <style>
+    table { border-collapse: collapse; }
+    table th, table td { padding: 4px; margin: 0; border: 1px solid #ccc; font-family: monospace; font-size: 14px; }
+    table td b { display: block; font-weight: bold; }
+    table th { background: #eee; }
+    table td.done { background: #cfc; }
+    </style>
+</head>
+<body>
+<table>
+<tr>
+    <th></th>
+    <th width="75">x0</th>
+    <th width="75">x1</th>
+    <th width="75">x2</th>
+    <th width="75">x3</th>
+    <th width="75">x4</th>
+    <th width="75">x5</th>
+    <th width="75">x6</th>
+    <th width="75">x7</th>
+</tr>
+<tr valign="top">
+    <th width="1">00</th>
+    <!-- 0 --><td class="done"><b>ADD</b>Eb,Gb</td>
+    <!-- 1 --><td class="done"><b>ADD</b>Ew,Gv</td>
+    <!-- 2 --><td class="done"><b>ADD</b>Gb,Eb</td>
+    <!-- 3 --><td class="done"><b>ADD</b>Gv,Ew</td>
+    <!-- 4 --><td class="done"><b>ADD</b>Ab,Ib</td>
+    <!-- 5 --><td class="done"><b>ADD</b>Aw,Iw</td>
+    <!-- 6 --><td></td>
+    <!-- 7 --><td></td>
+</tr>
+<tr valign="top">
+    <th width="1">08</th>
+    <!-- 8 --><td class="done"><b>OR</b>Eb,Gb</td>
+    <!-- 9 --><td class="done"><b>OR</b>Ew,Gv</td>
+    <!-- A --><td class="done"><b>OR</b>Gb,Eb</td>
+    <!-- B --><td class="done"><b>OR</b>Gv,Ew</td>
+    <!-- C --><td class="done"><b>OR</b>Ab,Ib</td>
+    <!-- D --><td class="done"><b>OR</b>Aw,Iw</td>
+    <!-- E --><td></td>
+    <!-- F --><td></td>
+</tr>
+<tr valign="top">
+    <th width="1">10</th>
+    <!-- 0 --><td class="done"><b>ADC</b>Eb,Gb</td>
+    <!-- 1 --><td class="done"><b>ADC</b>Ew,Gv</td>
+    <!-- 2 --><td class="done"><b>ADC</b>Gb,Eb</td>
+    <!-- 3 --><td class="done"><b>ADC</b>Gv,Ew</td>
+    <!-- 4 --><td class="done"><b>ADC</b>Ab,Ib</td>
+    <!-- 5 --><td class="done"><b>ADC</b>Aw,Iw</td>
+    <!-- 6 --><td></td>
+    <!-- 7 --><td></td>
+</tr>
+<tr valign="top">
+    <th width="1">18</th>
+    <!-- 8 --><td class="done"><b>SBB</b>Eb,Gb</td>
+    <!-- 9 --><td class="done"><b>SBB</b>Ew,Gv</td>
+    <!-- A --><td class="done"><b>SBB</b>Gb,Eb</td>
+    <!-- B --><td class="done"><b>SBB</b>Gv,Ew</td>
+    <!-- C --><td class="done"><b>SBB</b>Ab,Ib</td>
+    <!-- D --><td class="done"><b>SBB</b>Aw,Iw</td>
+    <!-- E --><td></td>
+    <!-- F --><td></td>
+</tr>
+<tr valign="top">
+    <th width="1">20</th>
+    <!-- 0 --><td class="done"><b>AND</b>Eb,Gb</td>
+    <!-- 1 --><td class="done"><b>AND</b>Ew,Gv</td>
+    <!-- 2 --><td class="done"><b>AND</b>Gb,Eb</td>
+    <!-- 3 --><td class="done"><b>AND</b>Gv,Ew</td>
+    <!-- 4 --><td class="done"><b>AND</b>Ab,Ib</td>
+    <!-- 5 --><td class="done"><b>AND</b>Aw,Iw</td>
+    <!-- 6 --><td></td>
+    <!-- 7 --><td></td>
+</tr>
+<tr valign="top">
+    <th width="1">28</th>
+    <!-- 8 --><td class="done"><b>SUB</b>Eb,Gb</td>
+    <!-- 9 --><td class="done"><b>SUB</b>Ew,Gv</td>
+    <!-- A --><td class="done"><b>SUB</b>Gb,Eb</td>
+    <!-- B --><td class="done"><b>SUB</b>Gv,Ew</td>
+    <!-- C --><td class="done"><b>SUB</b>Ab,Ib</td>
+    <!-- D --><td class="done"><b>SUB</b>Aw,Iw</td>
+    <!-- E --><td></td>
+    <!-- F --><td></td>
+</tr>
+<tr valign="top">
+    <th width="1">30</th>
+    <!-- 0 --><td class="done"><b>XOR</b>Eb,Gb</td>
+    <!-- 1 --><td class="done"><b>XOR</b>Ew,Gv</td>
+    <!-- 2 --><td class="done"><b>XOR</b>Gb,Eb</td>
+    <!-- 3 --><td class="done"><b>XOR</b>Gv,Ew</td>
+    <!-- 4 --><td class="done"><b>XOR</b>Ab,Ib</td>
+    <!-- 5 --><td class="done"><b>XOR</b>Aw,Iw</td>
+    <!-- 6 --><td></td>
+    <!-- 7 --><td></td>
+</tr>
+<tr valign="top">
+    <th width="1">38</th>
+    <!-- 8 --><td class="done"><b>CMP</b>Eb,Gb</td>
+    <!-- 9 --><td class="done"><b>CMP</b>Ew,Gv</td>
+    <!-- A --><td class="done"><b>CMP</b>Gb,Eb</td>
+    <!-- B --><td class="done"><b>CMP</b>Gv,Ew</td>
+    <!-- C --><td class="done"><b>CMP</b>Ab,Ib</td>
+    <!-- D --><td class="done"><b>CMP</b>Aw,Iw</td>
+    <!-- E --><td></td>
+    <!-- F --><td></td>
+</tr>
+<tr valign="top">
+    <th width="1">40</th>
+    <!-- 0 --><td><b>INC</b>ax</td>
+    <!-- 1 --><td><b>INC</b>cx</td>
+    <!-- 2 --><td><b>INC</b>dx</td>
+    <!-- 3 --><td><b>INC</b>bx</td>
+    <!-- 4 --><td><b>INC</b>sp</td>
+    <!-- 5 --><td><b>INC</b>bp</td>
+    <!-- 6 --><td><b>INC</b>si</td>
+    <!-- 7 --><td><b>INC</b>di</td>
+</tr>
+<tr valign="top">
+    <th width="1">48</th>
+    <!-- 8 --><td><b>DEC</b>ax</td>
+    <!-- 9 --><td><b>DEC</b>cx</td>
+    <!-- A --><td><b>DEC</b>dx</td>
+    <!-- B --><td><b>DEC</b>bx</td>
+    <!-- C --><td><b>DEC</b>sp</td>
+    <!-- D --><td><b>DEC</b>bp</td>
+    <!-- E --><td><b>DEC</b>si</td>
+    <!-- F --><td><b>DEC</b>di</td>
+</tr>
+<tr valign="top">
+    <th width="1">50</th>
+    <!-- 0 --><td><b></b></td>
+    <!-- 1 --><td><b></b></td>
+    <!-- 2 --><td><b></b></td>
+    <!-- 3 --><td><b></b></td>
+    <!-- 4 --><td><b></b></td>
+    <!-- 5 --><td><b></b></td>
+    <!-- 6 --><td><b></b></td>
+    <!-- 7 --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">58</th>
+    <!-- 8 --><td><b></b></td>
+    <!-- 9 --><td><b></b></td>
+    <!-- A --><td><b></b></td>
+    <!-- B --><td><b></b></td>
+    <!-- C --><td><b></b></td>
+    <!-- D --><td><b></b></td>
+    <!-- E --><td><b></b></td>
+    <!-- F --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">60</th>
+    <!-- 0 --><td><b></b></td>
+    <!-- 1 --><td><b></b></td>
+    <!-- 2 --><td><b></b></td>
+    <!-- 3 --><td><b></b></td>
+    <!-- 4 --><td><b></b></td>
+    <!-- 5 --><td><b></b></td>
+    <!-- 6 --><td><b></b></td>
+    <!-- 7 --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">68</th>
+    <!-- 8 --><td><b></b></td>
+    <!-- 9 --><td><b></b></td>
+    <!-- A --><td><b></b></td>
+    <!-- B --><td><b></b></td>
+    <!-- C --><td><b></b></td>
+    <!-- D --><td><b></b></td>
+    <!-- E --><td><b></b></td>
+    <!-- F --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">70</th>
+    <!-- 0 --><td><b>JO</b>b8</td>
+    <!-- 1 --><td><b>JNO</b>b8</td>
+    <!-- 2 --><td><b>JB</b>b8</td>
+    <!-- 3 --><td><b>JNB</b>b8</td>
+    <!-- 4 --><td><b>JZ</b>b8</td>
+    <!-- 5 --><td><b>JNZ</b>b8</td>
+    <!-- 6 --><td><b>JBE</b>b8</td>
+    <!-- 7 --><td><b>JA</b>b8</td>   
+</tr>
+<tr valign="top">
+    <th width="1">78</th>
+    <!--8--><td><b>JS</b>b8</td>
+    <!--9--><td><b>JNS</b>b8</td>
+    <!--A--><td><b>JP</b>b8</td>
+    <!--B--><td><b>JNP</b>b8</td>
+    <!--C--><td><b>JL</b>b8</td>
+    <!--D--><td><b>JNL</b>b8</td>
+    <!--E--><td><b>JLE</b>b8</td>
+    <!--F--><td><b>JG</b>b8</td>
+</tr>
+<tr valign="top">
+    <th width="1">80</th>
+    <!-- 0 --><td><b></b></td>
+    <!-- 1 --><td><b></b></td>
+    <!-- 2 --><td><b></b></td>
+    <!-- 3 --><td><b></b></td>
+    <!-- 4 --><td><b></b></td>
+    <!-- 5 --><td><b></b></td>
+    <!-- 6 --><td><b></b></td>
+    <!-- 7 --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">88</th>
+    <!-- 8 --><td><b>MOV</b>rm,r8</td>
+    <!-- 9 --><td><b>MOV</b>rm,r16</td>
+    <!-- A --><td><b>MOV</b>r8,rm</td>
+    <!-- B --><td><b>MOV</b>r16,rm</td>
+    <!-- C --><td><b></b></td>
+    <!-- D --><td><b></b></td>
+    <!-- E --><td><b></b></td>
+    <!-- F --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">90</th>
+    <!-- 0 --><td><b>NOP</b></td>
+    <!-- 1 --><td><b>XCHG</b>ax,cx</td>
+    <!-- 2 --><td><b>XCHG</b>ax,dx</td>
+    <!-- 3 --><td><b>XCHG</b>ax,bx</td>
+    <!-- 4 --><td><b>XCHG</b>ax,sp</td>
+    <!-- 5 --><td><b>XCHG</b>ax,bp</td>
+    <!-- 6 --><td><b>XCHG</b>ax,si</td>
+    <!-- 7 --><td><b>XCHG</b>ax,di</td>
+</tr>
+<tr valign="top">
+    <th width="1">98</th>
+    <!-- 8 --><td><b></b></td>
+    <!-- 9 --><td><b></b></td>
+    <!-- A --><td><b></b></td>
+    <!-- B --><td><b></b></td>
+    <!-- C --><td><b></b></td>
+    <!-- D --><td><b></b></td>
+    <!-- E --><td><b></b></td>
+    <!-- F --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">A0</th>
+    <!-- 0 --><td><b></b></td>
+    <!-- 1 --><td><b></b></td>
+    <!-- 2 --><td><b></b></td>
+    <!-- 3 --><td><b></b></td>
+    <!-- 4 --><td><b></b></td>
+    <!-- 5 --><td><b></b></td>
+    <!-- 6 --><td><b></b></td>
+    <!-- 7 --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">A8</th>
+    <!-- 8 --><td><b></b></td>
+    <!-- 9 --><td><b></b></td>
+    <!-- A --><td><b></b></td>
+    <!-- B --><td><b></b></td>
+    <!-- C --><td><b></b></td>
+    <!-- D --><td><b></b></td>
+    <!-- E --><td><b></b></td>
+    <!-- F --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">B0</th>
+    <!-- 0 --><td class="done"><b>MOV</b>al,Ib</td>
+    <!-- 1 --><td class="done"><b>MOV</b>cl,Ib</td>
+    <!-- 2 --><td class="done"><b>MOV</b>dl,Ib</td>
+    <!-- 3 --><td class="done"><b>MOV</b>bl,Ib</td>
+    <!-- 4 --><td class="done"><b>MOV</b>ah,Ib</td>
+    <!-- 5 --><td class="done"><b>MOV</b>ch,Ib</td>
+    <!-- 6 --><td class="done"><b>MOV</b>dh,Ib</td>
+    <!-- 7 --><td class="done"><b>MOV</b>bh,Ib</td>
+</tr>
+<tr valign="top">
+    <th width="1">B8</th>
+    <!-- 8 --><td class="done"><b>MOV</b>ax,Iw</td>
+    <!-- 9 --><td class="done"><b>MOV</b>cx,Iw</td>
+    <!-- A --><td class="done"><b>MOV</b>dx,Iw</td>
+    <!-- B --><td class="done"><b>MOV</b>bx,Iw</td>
+    <!-- C --><td class="done"><b>MOV</b>sp,Iw</td>
+    <!-- D --><td class="done"><b>MOV</b>bp,Iw</td>
+    <!-- E --><td class="done"><b>MOV</b>si,Iw</td>
+    <!-- F --><td class="done"><b>MOV</b>di,Iw</td>
+</tr>
+<tr valign="top">
+    <th width="1">C0</th>
+    <!-- 0 --><td><b></b></td>
+    <!-- 1 --><td><b></b></td>
+    <!-- 2 --><td><b></b></td>
+    <!-- 3 --><td><b></b></td>
+    <!-- 4 --><td><b></b></td>
+    <!-- 5 --><td><b></b></td>
+    <!-- 6 --><td><b></b></td>
+    <!-- 7 --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">C8</th>
+    <!-- 8 --><td><b></b></td>
+    <!-- 9 --><td><b></b></td>
+    <!-- A --><td><b></b></td>
+    <!-- B --><td><b></b></td>
+    <!-- C --><td><b></b></td>
+    <!-- D --><td><b></b></td>
+    <!-- E --><td><b></b></td>
+    <!-- F --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">D0</th>
+    <!-- 0 --><td><b></b></td>
+    <!-- 1 --><td><b></b></td>
+    <!-- 2 --><td><b></b></td>
+    <!-- 3 --><td><b></b></td>
+    <!-- 4 --><td><b></b></td>
+    <!-- 5 --><td><b></b></td>
+    <!-- 6 --><td><b></b></td>
+    <!-- 7 --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">D8</th>
+    <!-- 8 --><td><b></b></td>
+    <!-- 9 --><td><b></b></td>
+    <!-- A --><td><b></b></td>
+    <!-- B --><td><b></b></td>
+    <!-- C --><td><b></b></td>
+    <!-- D --><td><b></b></td>
+    <!-- E --><td><b></b></td>
+    <!-- F --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">E0</th>
+    <!-- 0 --><td><b></b></td>
+    <!-- 1 --><td><b></b></td>
+    <!-- 2 --><td><b></b></td>
+    <!-- 3 --><td><b></b></td>
+    <!-- 4 --><td><b></b></td>
+    <!-- 5 --><td><b></b></td>
+    <!-- 6 --><td><b></b></td>
+    <!-- 7 --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">E8</th>
+    <!-- 8 --><td><b></b></td>
+    <!-- 9 --><td><b></b></td>
+    <!-- A --><td><b></b></td>
+    <!-- B --><td><b>JMP</b>b8</td>
+    <!-- C --><td><b></b></td>
+    <!-- D --><td><b></b></td>
+    <!-- E --><td><b></b></td>
+    <!-- F --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">F0</th>
+    <!-- 0 --><td><b></b></td>
+    <!-- 1 --><td><b></b></td>
+    <!-- 2 --><td><b></b></td>
+    <!-- 3 --><td><b></b></td>
+    <!-- 4 --><td><b></b></td>
+    <!-- 5 --><td><b></b></td>
+    <!-- 6 --><td><b></b></td>
+    <!-- 7 --><td><b></b></td>
+</tr>
+<tr valign="top">
+    <th width="1">F8</th>
+    <!-- 8 --><td><b></b></td>
+    <!-- 9 --><td><b></b></td>
+    <!-- A --><td><b></b></td>
+    <!-- B --><td><b></b></td>
+    <!-- C --><td><b></b></td>
+    <!-- D --><td><b></b></td>
+    <!-- E --><td><b></b></td>
+    <!-- F --><td><b></b></td>
+</tr>
+</table>
+</body>
+</html>
