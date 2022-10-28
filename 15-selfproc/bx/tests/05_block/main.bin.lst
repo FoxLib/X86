@@ -1,0 +1,248 @@
+XRES    equ     640                               ; XRES    equ     640
+YRES    equ     400                               ; YRES    equ     400
+db 0x0B
+dd 3                                              ; push 3
+db 0x12
+dw fillall-$-2                                    ; call fillall
+db 0x0B
+dd 75                                             ; push 75
+db 0x0B
+dd 50                                             ; push  50
+db 0x0B
+dd 320                                            ; push  320
+db 0x0B
+dd 200                                            ; push  200
+db 0x0B
+dd test1                                          ; push  test1
+db 0x12
+dw window-$-2                                     ; call window
+db 0x10, 0xFD, 0xFF                               ; hlt
+test1:                                            ; test1:
+db      "Windows 97 Rulezz Forever...",0          ; db      "Windows 97 Rulezz Forever...",0
+window:                                           ; window:
+db 0x0C, 0, 9                                     ; push r0-r9
+db 0x0E, +15, 1                                   ; mov     r1, [sp+15]
+db 0x0E, +14, 2                                   ; mov     r2, [sp+14]
+db 0x0E, +13, 3                                   ; mov     r3, [sp+13]
+db 0x0E, +12, 4                                   ; mov     r4, [sp+12]
+db 0x0C, 1, 4                                     ; push r1-r4
+db 0x0B
+dd 7                                              ; push  7
+db 0x12
+dw drawblock-$-2                                  ; call drawblock
+db 0x32, 3, 2                                     ; subb    r3, 2
+db 0x32, 4, 2                                     ; subb    r4, 2
+db 0x30, 1, 1                                     ; addb    r1, 1
+db 0x30, 2, 1                                     ; addb    r2, 1
+db 0x0C, 1, 3                                     ; push r1-r3
+db 0x0B
+dd 1                                              ; push  1
+db 0x0B
+dd 15                                             ; push  15
+db 0x12
+dw drawblock-$-2                                  ; call drawblock
+db 0x0C, 1, 2                                     ; push r1-r2
+db 0x0B
+dd 1                                              ; push  1
+db 0x08, 4                                        ; push  r4
+db 0x0B
+dd 15                                             ; push  15
+db 0x12
+dw drawblock-$-2                                  ; call drawblock
+db 0x20, 4, 2, 2                                  ; add     r2, r2, r4
+db 0x0C, 1, 3                                     ; push r1-r3
+db 0x0B
+dd 1                                              ; push  1
+db 0x0B
+dd 8                                              ; push  8
+db 0x12
+dw drawblock-$-2                                  ; call drawblock
+db 0x22, 4, 2, 2                                  ; sub     r2, r2, r4
+db 0x20, 3, 1, 1                                  ; add     r1, r1, r3
+db 0x0C, 1, 2                                     ; push r1-r2
+db 0x0B
+dd 1                                              ; push  1
+db 0x08, 4                                        ; push  r4
+db 0x0B
+dd 8                                              ; push  8
+db 0x12
+dw drawblock-$-2                                  ; call drawblock
+db 0x22, 3, 1, 1                                  ; sub     r1, r1, r3
+db 0x30, 1, 2                                     ; addb    r1, 2
+db 0x30, 2, 2                                     ; addb    r2, 2
+db 0x32, 3, 3                                     ; subb    r3, 3
+db 0x0C, 1, 3                                     ; push r1-r3
+db 0x0B
+dd 14                                             ; push  14
+db 0x0B
+dd 1                                              ; push  1
+db 0x12
+dw drawblock-$-2                                  ; call drawblock
+db 0x0E, +11, 4                                   ; mov     r4, [sp+11]
+db 0x30, 1, 3                                     ; addb    r1, 3
+db 0x30, 2, 3                                     ; addb    r2, 3
+db 0x08, 1                                        ; push r1
+db 0x08, 2                                        ; push  r2
+db 0x08, 4                                        ; push  r4
+db 0x0B
+dd 15                                             ; push  15
+db 0x12
+dw printstr-$-2                                   ; call printstr
+db 0x0D, 9, 0                                     ; pop r9-r0
+db 0x15, 5                                        ; ret 5
+line:                                             ; line:
+db 0x0C, 0, 9                                     ; push r0-r9
+db 0x02, 0, 0                                     ; movu    r0, 0
+db 0x0E, +15, 1                                   ; mov     r1, [sp+15]
+db 0x0E, +13, 2                                   ; mov     r2, [sp+13]
+db 0x02, 3, 1                                     ; movu    r3, 1
+db 0x22, 1, 2, 2                                  ; sub     r2, r2, r1
+db 0x1a, @f-$-1                                   ; jnc     @f
+db 0x03, 3, -1                                    ; movs    r3, -1
+db 0x22, 2, 0, 2                                  ; sub     r2, r0, r2
+@@:                                               ; @@:
+db 0x0E, +14, 1                                   ; mov     r1, [sp+14]
+db 0x0E, +12, 4                                   ; mov     r4, [sp+12]
+db 0x01, 5
+dd XRES                                           ; mov     r5, XRES
+db 0x22, 1, 4, 4                                  ; sub     r4, r4, r1
+db 0x1a, .start-$-1                               ; jnc     .start
+db 0x01, 5
+dd -XRES                                          ; mov     r5, -XRES
+db 0x22, 4, 0, 4                                  ; sub     r4, r0, r4
+.start:                                           ; .start:
+db 0x22, 4, 2, 6                                  ; sub     r6, r2, r4
+db 0x01, 7
+dd XRES                                           ; mov     r7, XRES
+db 0x01, 8
+dd $c0000                                         ; mov     r8, $c0000
+db 0x0E, +14, 0                                   ; mov     r0, [sp+14]
+db 0x40, 7, 0                                     ; mul     r0, r7
+db 0x0E, +15, 1                                   ; mov     r1, [sp+15]
+db 0x20, 1, 0, 1                                  ; add     r1, r0, r1
+db 0x20, 8, 1, 0                                  ; add     r0, r1, r8
+db 0x0E, +12, 9                                   ; mov     r9, [sp+12]
+db 0x40, 7, 9                                     ; mul     r9, r7
+db 0x0E, +13, 1                                   ; mov     r1, [sp+13]
+db 0x20, 1, 9, 1                                  ; add     r1, r9, r1
+db 0x20, 8, 1, 9                                  ; add     r9, r1, r8
+db 0x0E, +11, 1                                   ; mov     r1, [sp+11]
+.pset:                                            ; .pset:
+db 0x06, 0, 1                                     ; movb    [r0], r1
+db 0x27, 9, 0, 0                                  ; cmp     r0, r0, r9
+db 0x19, .exit-$-1                                ; jz      .exit
+db 0x20, 6, 6, 7                                  ; add     r7, r6, r6
+db 0x20, 4, 7, 8                                  ; add     r8, r7, r4
+db 0x1d, @f-$-1                                   ; js      @f
+db 0x22, 4, 6, 6                                  ; sub     r6, r6, r4
+db 0x20, 3, 0, 0                                  ; add     r0, r0, r3
+@@:                                               ; @@:
+db 0x22, 2, 7, 8                                  ; sub     r8, r7, r2
+db 0x1c, .pset-$-1                                ; jns     .pset
+db 0x20, 2, 6, 6                                  ; add     r6, r6, r2
+db 0x20, 5, 0, 0                                  ; add     r0, r0, r5
+db 0x10
+dw .pset-$-2                                      ; jmp     .pset
+.exit:                                            ; .exit:
+
+db 0x0D, 9, 0                                     ; pop r9-r0
+db 0x15, 5                                        ; ret 5
+fillall:                                          ; fillall:
+db 0x0C, 0, 2                                     ; push r0-r2
+db 0x0E, +4, 1                                    ; mov     r1, [sp+4]
+db 0x00, 1, 2                                     ; mov     r2, r1
+db 0x3e, 1,  8                                    ; shl     r1, 8
+db 0x26, 1, 2, 2                                  ; or      r2, r2, r1
+db 0x00, 2, 1                                     ; mov     r1, r2
+db 0x3e, 2,  16                                   ; shl     r2, 16
+db 0x26, 1, 2, 2                                  ; or      r2, r2, r1
+db 0x01, 1
+dd XRES*YRES/4                                    ; mov     r1, XRES*YRES/4
+db 0x01, 0
+dd 0xc0000                                        ; mov     r0, 0xc0000
+@@:                                               ; @@:
+db 0x07, 0, 2                                     ; movd    [r0], r2
+db 0x30, 0, 4                                     ; addb    r0, 4
+db 0x32, 1, 1                                     ; subb r1, 1
+db 0x18, @b-$-1                                   ; jnz     @b
+db 0x0D, 2, 0                                     ; pop r2-r0
+db 0x15, 1                                        ; ret 1
+drawblock:                                        ; drawblock:
+db 0x0C, 0, 5                                     ; push r0-r5
+db 0x01, 1
+dd XRES                                           ; mov     r1, XRES
+db 0x01, 2
+dd $c0000                                         ; mov     r2, $c0000
+db 0x0E, +11, 0                                   ; mov     r0, [sp+11]
+db 0x0E, +10, 3                                   ; mov     r3, [sp+10]
+db 0x40, 1, 3                                     ; mul     r3, r1
+db 0x20, 0, 3, 3                                  ; add     r3, r3, r0
+db 0x20, 2, 3, 0                                  ; add     r0, r3, r2
+db 0x0E, +8, 2                                    ; mov     r2, [sp+8]
+db 0x0E, +7, 3                                    ; mov     r3, [sp+7]
+.YLn:                                             ; .YLn:
+db 0x0E, +9, 4                                    ; mov     r4, [sp+9]
+.XLn:                                             ; .XLn:
+db 0x06, 0, 3                                     ; movb    [r0], r3
+db 0x30, 0, 1                                     ; addb r0, 1
+db 0x32, 4, 1                                     ; subb r4, 1
+db 0x18, .XLn-$-1                                 ; jnz     .XLn
+db 0x0E, +9, 4                                    ; mov     r4, [sp+9]
+db 0x22, 4, 0, 0                                  ; sub     r0, r0, r4
+db 0x20, 1, 0, 0                                  ; add     r0, r0, r1
+db 0x32, 2, 1                                     ; subb r2, 1
+db 0x18, .YLn-$-1                                 ; jnz     .YLn
+db 0x0D, 5, 0                                     ; pop r5-r0
+db 0x15, 5                                        ; ret 5
+printstr:                                         ; printstr:
+db 0x0C, 0, 8                                     ; push r0-r8
+db 0x01, 0
+dd $c0000                                         ; mov     r0, $c0000
+db 0x0E, +12, 1                                   ; mov     r1, [sp+12]
+db 0x01, 7
+dd XRES                                           ; mov     r7, XRES
+db 0x40, 7, 1                                     ; mul     r1, r7
+db 0x0E, +13, 2                                   ; mov     r2, [sp+13]
+db 0x20, 2, 1, 1                                  ; add     r1, r1, r2
+db 0x20, 0, 1, 0                                  ; add     r0, r1, r0
+db 0x30, 0, 7                                     ; addb    r0, 7
+db 0x01, 3
+dd fonts                                          ; mov     r3, fonts
+db 0x0E, +10, 4                                   ; mov     r4, [sp+10]
+db 0x0E, +11, 8                                   ; mov     r8, [sp+11]
+.L3:                                              ; .L3:
+db 0x04, 8, 1                                     ; movb    r1, [r8]
+db 0x30, 8, 1                                     ; addb r8, 1
+db 0x37, 1, 0                                     ; cmpb    r1, 0
+db 0x19, .end-$-1                                 ; jz      .end
+db 0x3e, 1,  3                                    ; shl     r1, 3
+db 0x20, 3, 1, 1                                  ; add     r1, r1, r3
+db 0x02, 6, 8                                     ; movu    r6, 8
+.L2:                                              ; .L2:
+db 0x02, 5, 8                                     ; movu    r5, 8
+db 0x04, 1, 2                                     ; movb    r2, [r1]
+.L1:                                              ; .L1:
+db 0x3c, 2,  1                                    ; shr     r2, 1
+db 0x1a, @f-$-1                                   ; jnc     @f
+db 0x06, 0, 4                                     ; movb    [r0], r4
+@@:                                               ; @@:
+db 0x32, 0, 1                                     ; subb r0, 1
+db 0x32, 5, 1                                     ; subb r5, 1
+db 0x18, .L1-$-1                                  ; jnz     .L1
+db 0x30, 1, 1                                     ; addb r1, 1
+db 0x30, 0, 8                                     ; addb    r0, 8
+db 0x20, 7, 0, 0                                  ; add     r0, r0, r7
+db 0x32, 6, 1                                     ; subb r6, 1
+db 0x18, .L2-$-1                                  ; jnz     .L2
+db 0x01, 2
+dd XRES*8                                         ; mov     r2, XRES*8
+db 0x22, 2, 0, 0                                  ; sub     r0, r0, r2
+db 0x30, 0, 8                                     ; addb    r0, 8
+db 0x10
+dw .L3-$-2                                        ; jmp     .L3
+.end:                                             ; .end:
+
+db 0x0D, 8, 0                                     ; pop r8-r0
+db 0x15, 4                                        ; ret 4
+fonts:                                            ; fonts:
+file    "../../../include/font8x8.bin"            ; file    "../../../include/font8x8.bin"
