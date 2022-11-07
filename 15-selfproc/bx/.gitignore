@@ -1,2 +1,4 @@
 bx
 *.o
+main.bin
+*.lst
