@@ -114,7 +114,7 @@ reg         __adsize        = 1'b0;
 reg         __opsize        = 1'b0;
 reg         __override      = 1'b0;
 reg [1:0]   __rep           = 2'b00;
-reg [79:0]  __segment       = 80'h0000_0000_0000_0000_____F800;
+reg [15:0]  __segment       = 16'hF800;
 
 // ---------------------------------------------------------------------
 // Модуль деления op1 / op2 -> divres | divrem
@@ -162,8 +162,8 @@ wire [31:0] esp_inc     = defsize ? esp + 4'h4 : {esp[31:16], sp_inc};
 
 // Приращение +/- 1,2,4;
 wire [ 2:0] str_inc     = t == fetch ?
-    ((    in[0] ? (__opsize ? 4 : 2) : 1)) :
-    ((opcode[0] ? (  opsize ? 4 : 2) : 1));
+    ((    in[0] ? (__opsize ? 3'h4 : 3'h2) : 3'h1)) :
+    ((opcode[0] ? (  opsize ? 3'h4 : 3'h2) : 3'h1));
 
 wire [31:0] str_ncx     = ecx - 1'b1;
 wire [31:0] str_zcx     = defsize ? ecx : ecx[15:0];

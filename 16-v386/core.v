@@ -2159,7 +2159,7 @@ reg         __adsize        = 1'b0;
 reg         __opsize        = 1'b0;
 reg         __override      = 1'b0;
 reg [1:0]   __rep           = 2'b00;
-reg [79:0]  __segment       = 80'h0000_0000_0000_0000_____F800;
+reg [15:0]  __segment       = 16'hF800;
 
 // ---------------------------------------------------------------------
 // Модуль деления op1 / op2 -> divres | divrem
@@ -2207,8 +2207,8 @@ wire [31:0] esp_inc     = defsize ? esp + 4'h4 : {esp[31:16], sp_inc};
 
 // Приращение +/- 1,2,4;
 wire [ 2:0] str_inc     = t == fetch ?
-    ((    in[0] ? (__opsize ? 4 : 2) : 1)) :
-    ((opcode[0] ? (  opsize ? 4 : 2) : 1));
+    ((    in[0] ? (__opsize ? 3'h4 : 3'h2) : 3'h1)) :
+    ((opcode[0] ? (  opsize ? 3'h4 : 3'h2) : 3'h1));
 
 wire [31:0] str_ncx     = ecx - 1'b1;
 wire [31:0] str_zcx     = defsize ? ecx : ecx[15:0];
@@ -2273,7 +2273,7 @@ wire [32:0] alu_r =
     alu == alu_sbb ? op1 - op2 - eflags[CF] :
     alu == alu_and ? op1 & op2:
     alu == alu_xor ? op1 ^ op2:
-                     op1 - op2; // sub, cmp
+                     op1 - op2; // SUB, CMP
 
 wire [ 4:0] alu_top = size ? (opsize ? 31 : 15) : 7;
 
@@ -2329,10 +2329,12 @@ always @* begin
             daa_i = eax[7:0];
 
             // Младший ниббл
-            if (eax[3:0] > 9 || eflags[AF]) begin
-                daa_i = in[3] ? eax[7:0]-6 : eax[7:0]+6;
+            if (eax[3:0] > 4'h9 || eflags[AF]) begin
+
+                daa_i = in[3] ? eax[7:0] - 3'h6 : eax[7:0] + 3'h6;
                 daa_c = daa_i[8];
-                daa_a = 1;
+                daa_a = 1'b1;
+
             end
 
             daa_r = daa_i[7:0];
@@ -2340,15 +2342,15 @@ always @* begin
 
             // Старший ниббл
             if (daa_c || daa_i[7:0] > 8'h9F) begin
-                daa_r = in[3] ? daa_i[7:0]-8'h60 : daa_i[7:0]+8'h60;
-                daa_x = 1;
+                daa_r = in[3] ? daa_i[7:0] - 8'h60 : daa_i[7:0] + 8'h60;
+                daa_x = 1'b1;
             end
 
-            eflags_d[SF] =   daa_r[7];        // S
-            eflags_d[ZF] = ~|daa_r[7:0];      // Z
-            eflags_d[AF] =   daa_a;           // A
-            eflags_d[PF] = ~^daa_r[7:0];      // P
-            eflags_d[OF] =   daa_x;           // C
+            eflags_d[SF] =   daa_r[7];   // SF
+            eflags_d[ZF] = ~|daa_r[7:0]; // ZF
+            eflags_d[AF] =   daa_a;      // AF
+            eflags_d[PF] = ~^daa_r[7:0]; // PF
+            eflags_d[OF] =   daa_x;      // CF
 
         end
 
@@ -2358,20 +2360,20 @@ always @* begin
             daa_i = eax[ 7:0];
             daa_r = eax[15:0];
 
-            if (eflags[4] || eax[3:0] > 9) begin
+            if (eflags[4] || eax[3:0] > 4'h9) begin
 
-                daa_i = alu[0] ? eax[ 7:0] - 6 : eax[ 7:0] + 6;
-                daa_h = alu[0] ? eax[15:8] - 1 : eax[15:8] + 1;
+                daa_i = alu[0] ? eax[ 7:0] - 3'h6 : eax[ 7:0] + 3'h6;
+                daa_h = alu[0] ? eax[15:8] - 1'b1 : eax[15:8] + 1'b1;
                 daa_r = {daa_h, 4'h0, daa_i[3:0]};
 
-                eflags_d[AF] = 1; // AF=1
-                eflags_d[CF] = 1; // CF=1
+                eflags_d[AF] = 1'b1;
+                eflags_d[CF] = 1'b1;
 
             end
             else begin
 
-                eflags_d[AF] = 0;
-                eflags_d[CF] = 0;
+                eflags_d[AF] = 1'b0;
+                eflags_d[CF] = 1'b0;
 
             end
 

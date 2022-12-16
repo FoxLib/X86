@@ -2,6 +2,7 @@ db
 incremental_db
 simulation
 timing
+output_files
 *.jdi
 *.pof
 *.sld
