@@ -358,10 +358,9 @@ ps2 ps2_inst
     .data       (ps2_data)
 );
 
-
 endmodule
 
-`include "../core32/core.v"
+`include "../core.v"
 `include "../vga.v"
 `include "../pctl.v"
 `include "../ps2.v"

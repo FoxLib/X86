@@ -21,21 +21,7 @@ input           wren_b;
 output   [7:0]  q_a;
 output   [7:0]  q_b;
 
-`ifndef ALTERA_RESERVED_QIS
-// synopsys translate_off
-`endif
-    tri1      clock;
-    tri0      wren_a;
-    tri0      wren_b;
-`ifndef ALTERA_RESERVED_QIS
 // synopsys translate_on
-`endif
-
-    wire [7:0] sub_wire0;
-    wire [7:0] sub_wire1;
-    wire [7:0] q_a = sub_wire0[7:0];
-    wire [7:0] q_b = sub_wire1[7:0];
-
 altsyncram altsyncram_component (
     .address_a  (address_a),
     .address_b  (address_b),
@@ -44,8 +30,8 @@ altsyncram altsyncram_component (
     .data_b     (data_b),
     .wren_a     (wren_a),
     .wren_b     (wren_b),
-    .q_a        (sub_wire0),
-    .q_b        (sub_wire1),
+    .q_a        (q_a),
+    .q_b        (q_b),
     .aclr0      (1'b0),
     .aclr1      (1'b0),
     .addressstall_a (1'b0),
@@ -78,8 +64,8 @@ defparam
     altsyncram_component.operation_mode = "BIDIR_DUAL_PORT",
     altsyncram_component.outdata_aclr_a = "NONE",
     altsyncram_component.outdata_aclr_b = "NONE",
-    altsyncram_component.outdata_reg_a = "CLOCK0", // UNREGISTERED
-    altsyncram_component.outdata_reg_b = "CLOCK0", // UNREGISTERED
+    altsyncram_component.outdata_reg_a = "UNREGISTERED",
+    altsyncram_component.outdata_reg_b = "UNREGISTERED",
     altsyncram_component.power_up_uninitialized = "FALSE",
     altsyncram_component.ram_block_type = "M10K",
     altsyncram_component.read_during_write_mode_mixed_ports = "DONT_CARE",

@@ -37,61 +37,19 @@ localparam
 // УПРАВЛЕНИЕ ПАМЯТЬЮ
 // ---------------------------------------------------------------------
 
-// Пока что режим REAL-MODE
+// REAL-MODE
 assign address =
-    prot ? (desc_address + effective) :
     src ? {segment[15:0], 4'h0} + (adsize ? ea[31:0] : ea[15:0]) :
           {     cs[15:0], 4'h0} + eip[15:0];
 
 initial begin
 
-    we          = 1'b0;
-    out         = 1'b0;
-    port        = 1'b0;
-    port_clk    = 1'b0;
-    port_o      = 1'b0;
-    port_w      = 1'b0;
-
-end
-
-// Вычисление компонентов текущего селектора
-wire [79:0] descriptor      = src ? segment : cs;
-wire [31:0] effective       = src ? ea      : eip;
-wire [ 1:0] desc_cpl        = src ? segment[1:0] : cs[1:0];
-
-// Тип и DPL сегмента
-wire [ 2:0] desc_type       = descriptor[59:57];
-wire [ 1:0] desc_dpl        = descriptor[62:61];
-
-// Вычисление лимита с учетом гранулярности
-wire [31:0] desc_limit      = ({descriptor[67:64], descriptor[31:16]} + 1'b1) << (descriptor[71] ? 12 : 0);
-
-// При выбранном TYPE=01x, сегмент расширяется вниз
-wire [31:0] desc_address    =  {descriptor[79:72], descriptor[55:32]} - (desc_type[2:1] == 2'b01 ? desc_limit : 0);
-reg         desc_access;
-
-// Проверка памяти в защищенном режиме
-always @* begin
-
-    desc_access = ~prot;
-
-    // Проверяется на каждом такте
-    if (prot) begin
-
-        // Превышение размера дескриптора
-        if (effective > desc_limit) desc_access = 1'b0;
-        // Сегмент не присутствует
-        else if (!descriptor[63]) desc_access = 1'b0;
-        // Попытка выполнить код в сегменте данных
-        else if (!desc_type[2] && !src) desc_access = 1'b0;
-        // Попытка записать данные в сегменте данных, где запись не разрешена
-        else if (!desc_type[2] && !desc_type[0] && we) desc_access = 1'b0;
-        // Попытка чтения данных из сегмента кода
-        else if ( desc_type[2] && src) desc_access = 1'b0;
-        // Не подходит уровень привелегий; но согласованный код не проверять
-        else if (desc_dpl < desc_cpl && desc_type[2:1] != 2'b11) desc_access = 1'b0;
-
-    end
+    we       = 1'b0;
+    out      = 1'b0;
+    port     = 1'b0;
+    port_clk = 1'b0;
+    port_o   = 1'b0;
+    port_w   = 1'b0;
 
 end
 
@@ -114,15 +72,14 @@ reg [17:0]  eflags  = 18'b00_0000_0000_0000_0010;
 reg [31:0]  eip     = 32'h0000_0000;
 reg [31:0]  eip_rep = 32'h0000_0000;
 
-//                   | ДЕСКРИПТОР        | СЕЛЕКТОР
-reg [79:0]  es  = 80'h0000_0000_0000_0000_____F000;
-reg [79:0]  cs  = 80'h0000_0000_0000_0000_____F000;
-reg [79:0]  ss  = 80'h0000_0000_0000_0000_____0000;
-reg [79:0]  ds  = 80'h0000_0000_0000_0000_____F800;
-reg [79:0]  fs  = 80'h0000_0000_0000_0000_____0000;
-reg [79:0]  gs  = 80'h0000_0000_0000_0000_____0000;
+// Сегменты
+reg [15:0]  es  = 80'hF000;
+reg [15:0]  cs  = 80'hF000;
+reg [15:0]  ss  = 80'h0000;
+reg [15:0]  ds  = 80'hF800;
+reg [15:0]  fs  = 80'h0000;
+reg [15:0]  gs  = 80'h0000;
 
-reg [31:0]  cr0 = 32'h0000_0000;
 // ---------------------------------------------------------------------
 
 reg [3:0]   t               = 1'b0;     // Фаза исполнения
@@ -182,8 +139,8 @@ wire [63:0] _divr   = {divrem, diva[63]};
 // Вычисление следующего EIP в зависимости от 54-го бита
 // ---------------------------------------------------------------------
 
-wire        defsize     = cs[54+16] & prot;
-wire        stacksize   = ss[54+16] & prot;
+wire        defsize     = 1'b0;
+wire        stacksize   = 1'b0;
 wire [15:0] sp_dec      = esp[15:0] - (opsize ? 3'h4 : 2'h2);
 wire [15:0] sp_inc      = esp[15:0] + (opsize ? 3'h4 : 2'h2);
 wire [15:0] ipnext1     = eip[15:0] + 1'b1;
