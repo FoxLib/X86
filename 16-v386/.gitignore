@@ -35,3 +35,4 @@ sd.img
 *.com
 *.mp4
 out
+/core.v
