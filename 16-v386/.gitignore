@@ -37,3 +37,4 @@ sd.img
 *.mp4
 out
 /core.v
+*.o
