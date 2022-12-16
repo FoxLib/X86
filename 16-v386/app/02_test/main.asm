@@ -3,5 +3,6 @@
 [GLOBAL _start]
 
 _start:
-        mov     esp, 0x00400000
+
+        mov     esp, 0x00000800
         jmp     main

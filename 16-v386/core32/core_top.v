@@ -35,12 +35,15 @@ if (locked) begin
 if (reset_n == 1'b0) begin
 
     t           <= fetch;
-    cs          <= 16'hF800; // 16'hF000
-    eip         <= 16'h0000; // 16'hFFF0
+    cs          <= 16'h000;
+    ds          <= 16'h000;
+    es          <= 16'h000;
+    ss          <= 16'h000;
+    eip         <= 20'hF8000;
     eflags      <= 2'h2;
     __segment   <= 80'hF800;
-    __adsize    <= 1'b0;
-    __opsize    <= 1'b0;
+    __adsize    <= defsize;
+    __opsize    <= defsize;
     __override  <= 1'b0;
     __rep       <= 1'b0;
     __opext     <= 1'b0;
@@ -301,6 +304,7 @@ else case (t)
 
                     // MOV modrm
                     8'b1000_10xx: begin t <= fetch_modrm; ignoreo <= ~in[1]; end
+
                     // MOV r,imm
                     8'b1011_1xxx: begin t <= fetch_imm16; end
 

@@ -90,6 +90,10 @@ de0pll unit_pll
 
 // ---------------------------------------------------------------------
 // Маршрутизация памяти
+// 256K Базовая
+// 32K  BIOS
+// 8K   TextMode
+// 1K   DAC
 // ---------------------------------------------------------------------
 
 wire [31:0] address;
@@ -116,23 +120,25 @@ always @* begin
 
         // 0..256K
         20'b00xx_xxxxxxxx_xxxxxxxx: begin we_membase = we; in = in_membase; end
-        // VGA B8000-B9FFF
+
+        // VGA B8000-B9FFF 8K
         20'b1011_100xxxxx_xxxxxxxx: begin we_vga = we; in = in_vga; end
-        // VGA A0000-AFFFF
+
+        // VGA A0000-AFFFF 64K
         20'b1010_xxxxxxxx_xxxxxxxx: case (videomode)
 
             2: begin
 
-                in          = in_membase;
-                we_membase  = we;
-                mm_address  = {2'b11, address[15:0]};
+                in         = in_membase;
+                we_membase = we;
+                mm_address = {2'b11, address[15:0]};
 
             end
 
         endcase
 
-        // BIOS F8000-FFFFF
-        20'b1111_1xxxxxxx_xxxxxxxx: begin we_bios     = we; in = in_bios; end
+        // BIOS F8000-FFFFF 32K
+        20'b1111_1xxxxxxx_xxxxxxxx: begin we_bios = we; in = in_bios; end
 
     endcase
 
@@ -158,6 +164,33 @@ bios bios_inst
     .q_a        (in_bios),
     .data_a     (out),
     .wren_a     (we_bios),
+);
+
+// 8k: Видеопамять и знакогенератор
+font font_inst
+(
+    .clock      (clock_100),
+
+    // Видеоадаптер
+    .address_a  (vga_address),
+    .q_a        (vga_data),
+
+    // Процессор
+    .address_b  (address[12:0]),
+    .q_b        (in_vga),
+    .data_b     (out),
+    .wren_b     (we_vga),
+);
+
+// 1kb
+dac dac_inst
+(
+    .clock      (clock_100),
+    .address_a  (vga_dac_address),
+    .q_a        (vga_dac_data),
+    .address_b  (dac_address),
+    .data_b     (dac_out),
+    .wren_b     (dac_we),
 );
 
 // ---------------------------------------------------------------------
@@ -259,33 +292,6 @@ wire [17:0] gfx_address;
 wire [ 7:0] gfx_data;
 wire [ 7:0] vga_dac_address;
 wire [31:0] vga_dac_data;
-
-// 8k: Видеопамять и знакогенератор
-font font_inst
-(
-    .clock      (clock_100),
-
-    // Видеоадаптер
-    .address_a  (vga_address),
-    .q_a        (vga_data),
-
-    // Процессор
-    .address_b  (address[12:0]),
-    .q_b        (in_vga),
-    .data_b     (out),
-    .wren_b     (we_vga),
-);
-
-// 1kb
-dac dac_inst
-(
-    .clock      (clock_100),
-    .address_a  (vga_dac_address),
-    .q_a        (vga_dac_data),
-    .address_b  (dac_address),
-    .data_b     (dac_out),
-    .wren_b     (dac_we),
-);
 
 vga vga_inst
 (
