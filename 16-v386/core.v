@@ -2165,13 +2165,15 @@ reg [15:0]  __segment       = 16'hF800;
 // Модуль деления op1 / op2 -> divres | divrem
 // ---------------------------------------------------------------------
 
-reg [63:0]  diva            = 1'b0;
-reg [63:0]  divb            = 1'b0;
-reg [ 6:0]  divcnt          = 1'b0;
-reg [63:0]  divrem          = 1'b0;
-reg [63:0]  divres          = 1'b0;
-reg         signa           = 1'b0;
-reg         signb           = 1'b0;
+reg [63:0]  diva    = 1'b0;
+reg [63:0]  divb    = 1'b0;
+reg [ 6:0]  divcnt  = 1'b0;
+reg [63:0]  divrem  = 1'b0;
+reg [63:0]  divres  = 1'b0;
+reg         signa   = 1'b0;
+reg         signb   = 1'b0;
+
+// --------------------------------------------
 
 wire        signd   = signa ^ signb;
 wire [63:0] mult    = op1 * op2;

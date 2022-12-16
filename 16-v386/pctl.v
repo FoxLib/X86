@@ -105,7 +105,7 @@ always @(posedge clock) begin
     // Приведение к начальным значениям
     if (reset_n == 0) begin
 
-        videomode       <= 0; // 0-Тестовый, 2-screen13
+        videomode       <= 0; // 0-Тестовый, 2-Screen13
         vect_master     <= 8;
         pit0_ff         <= 0;
         dac_cursor      <= 0;
