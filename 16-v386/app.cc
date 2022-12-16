@@ -129,7 +129,7 @@ public:
         }
 
         // Загрузить bios
-        if (fp = fopen("bios/bios.bin", "rb")) {
+        if (fp = fopen("bios.bin", "rb")) {
 
             fseek(fp, 0, SEEK_END);
             int size = ftell(fp);
@@ -138,7 +138,7 @@ public:
             fclose(fp);
 
         } else {
-            printf("ERROR: bios/bios.bin not found\n");
+            printf("ERROR: bios.bin not found\n");
             exit(1);
         }
 
@@ -188,7 +188,11 @@ public:
 
         // Чтение/Запись в память для процессора
         int address = vcpu_mod->address & 0xfffff;
+
+        // Запись в память (1 Мб доступен)
         if (vcpu_mod->we) memory[ address ] = vcpu_mod->out;
+
+        // Чтение из памяти после записи
         vcpu_mod->in = memory[ address ];
 
         // Запись в ЦАП

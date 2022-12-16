@@ -41,9 +41,10 @@ if (reset_n == 1'b0) begin
     ss          <= 16'h000;
     eip         <= 20'hF8000;
     eflags      <= 2'h2;
-    __segment   <= 80'hF800;
+    adsize      <= defsize;
     __adsize    <= defsize;
     __opsize    <= defsize;
+    __segment   <= 16'h0000;
     __override  <= 1'b0;
     __rep       <= 1'b0;
     __opext     <= 1'b0;
@@ -126,15 +127,13 @@ else case (t)
                     // FWAIT, NOP
                     8'h9B, 8'h90: begin t <= fetch; end
 
-                    // *ALU* modrm; XCHG modrm; ESC
+                    // <ALU> modrm; XCHG modrm; ESC
                     8'b00xx_x0xx,
                     8'b1000_011x,
                     8'b1101_1xxx: begin t <= fetch_modrm; end
 
-                    // *ALU* a,imm
-                    // JMP|CALL far seg:off
-                    8'b00xx_x101,
-                    8'b1001_1010,
+                    8'b00xx_x101, // <ALU> a, imm
+                    8'b1001_1010, // JMP|CALL far seg:off
                     8'b1110_1010: begin t <= fetch_imm16; end
 
                     // RET/RETF imm

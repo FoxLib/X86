@@ -1,9 +1,16 @@
 CC=clang
-COPT=-Os -ffreestanding -fno-pie -nostdlib -m32 -mno-sse
+# gcc -mgeneral-regs-only
+COPT=-Os -ffreestanding -fno-pie -nostdlib -m32  -mno-sse -mno-mmx -I../../include
 DEPS=nasm.o main.o
+ROOT=../..
 
 all: $(DEPS)
-	ld -m elf_i386 -nostdlib -nodefaultlibs --oformat binary -Ttext=0xF8000 -Tdata=0x10000 $(DEPS) -o core.bin
+	ld -m elf_i386 -nostdlib -nodefaultlibs --oformat binary -Ttext=0xF8000 -Tdata=0x800 $(DEPS) -o bios.bin
+	objdump -Mintel -S main.o > main.lst
+	php $(ROOT)/utils/makebin.php bios.bin $(ROOT)/bios.hex
+	php $(ROOT)/utils/bin2mif.php bios.bin 32768 > $(ROOT)/de0/bios.mif
+	mv bios.bin $(ROOT)/bios.bin
+	cd $(ROOT) && make
 nasm.o: main.asm
 	nasm -felf32 -o nasm.o main.asm
 %.o: %.c

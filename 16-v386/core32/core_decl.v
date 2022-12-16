@@ -39,8 +39,8 @@ localparam
 
 // REAL-MODE
 assign address =
-    src ? {segment[15:0], 4'h0} + (adsize ? ea[31:0] : ea[15:0]) :
-          {     cs[15:0], 4'h0} + eip[15:0];
+    src ? {segment, 4'h0} + (adsize ? ea  :  ea[15:0]) :
+          {     cs, 4'h0} + (adsize ? eip : eip[15:0]);
 
 initial begin
 
@@ -114,7 +114,7 @@ reg         __adsize        = 1'b0;
 reg         __opsize        = 1'b0;
 reg         __override      = 1'b0;
 reg [1:0]   __rep           = 2'b00;
-reg [15:0]  __segment       = 16'hF800;
+reg [15:0]  __segment       = 16'h0000;
 
 // -----------------------------------------------------------------------------
 // Модуль деления op1 / op2 -> divres | divrem

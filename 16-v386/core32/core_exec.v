@@ -17,9 +17,10 @@ exec: casex (opcode)
         // Выставить операнды на вычисление
         0: begin
 
+            fn  <= 1;
             op1 <= size ? (opsize ? eax : eax[15:0]) : eax[7:0];
             op2 <= size ? (opsize ? wb  : wb[15:0]) : in;
-            fn  <= 1;
+
             if (size == 0) eip <= eip_next;
 
         end

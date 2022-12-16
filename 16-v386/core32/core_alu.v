@@ -29,10 +29,11 @@ wire [32:0] alu_r =
                      op1 - op2; // SUB, CMP
 
 wire [ 4:0] alu_top = size ? (opsize ? 31 : 15) : 7;
+wire [ 5:0] alu_up  = alu_top + 1'b1;
 
 wire is_add  = alu == alu_add || alu == alu_adc;
 wire is_lgc  = alu == alu_xor || alu == alu_and || alu == alu_or;
-wire alu_cf  = alu_r[alu_top + 1'b1];
+wire alu_cf  = alu_r[alu_up];
 wire alu_af  = op1[4] ^ op2[4] ^ alu_r[4];
 wire alu_sf  = alu_r[alu_top];
 wire alu_zf  = size ? (opsize ? ~|alu_r[31:0] : ~|alu_r[15:0]) : ~|alu_r[7:0];

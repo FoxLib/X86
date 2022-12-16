@@ -1,23 +1,80 @@
 [*]
 [*] GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
-[*] Mon Sep 26 12:19:02 2022
+[*] Fri Dec 16 17:51:48 2022
 [*]
 [dumpfile] "/disk/vdisk/dev/x86/16-v386/tb.vcd"
-[dumpfile_mtime] "Mon Sep 26 12:18:32 2022"
-[dumpfile_size] 258437
+[dumpfile_mtime] "Fri Dec 16 17:51:00 2022"
+[dumpfile_size] 234292
 [savefile] "/disk/vdisk/dev/x86/16-v386/tb.gtkw"
-[timestart] 0
-[size] 1918 1027
+[timestart] 542
+[size] 1920 1029
 [pos] -1 -1
-*-6.000000 129 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-7.000000 680 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] tb.
 [sst_width] 248
-[signals_width] 304
+[signals_width] 212
 [sst_expanded] 1
-[sst_vpaned_height] 324
+[sst_vpaned_height] 308
 @28
 tb.clock
 [color] 2
 tb.clock_25
+@800200
+-I/O
+@28
+[color] 2
+tb.cpu_inst.src
+@22
+[color] 2
+tb.cpu_inst.fn[4:0]
+tb.cpu_inst.instr[3:0]
+tb.cpu_inst.address[31:0]
+tb.cpu_inst.in[7:0]
+tb.cpu_inst.out[7:0]
+@28
+tb.cpu_inst.we
+@1000200
+-I/O
+@c00200
+-Sizes
+@28
+tb.cpu_inst.adsize
+tb.cpu_inst.opsize
+tb.cpu_inst.size
+tb.cpu_inst.dir
+@1401200
+-Sizes
+@800200
+-REGS
+@22
+[color] 5
+tb.cpu_inst.eax[31:0]
+[color] 5
+tb.cpu_inst.ebx[31:0]
+[color] 5
+tb.cpu_inst.ecx[31:0]
+[color] 5
+tb.cpu_inst.edx[31:0]
+[color] 5
+tb.cpu_inst.esp[31:0]
+[color] 5
+tb.cpu_inst.ebp[31:0]
+[color] 5
+tb.cpu_inst.esi[31:0]
+[color] 5
+tb.cpu_inst.edi[31:0]
+@1000200
+-REGS
+@800200
+-ALU
+@22
+[color] 7
+tb.cpu_inst.eflags[17:0]
+tb.cpu_inst.alu_top[4:0]
+tb.cpu_inst.alu_r[32:0]
+tb.cpu_inst.op1[31:0]
+tb.cpu_inst.op2[31:0]
+@1000200
+-ALU
 [pattern_trace] 1
 [pattern_trace] 0

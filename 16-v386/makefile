@@ -1,20 +1,29 @@
 VRL=/usr/share/verilator/include
 DIR=core32
+RUN=tbc
+# icarus | tbc
 
-#all: icarus
-all: tbc
+all: $(RUN)
+
 icarus: core.v
 	iverilog -g2005-sv -DICARUS=1 -I$(DIR) -o tb.qqq tb.v core.v
 	vvp tb.qqq >> /dev/null
 	rm tb.qqq
+
 wave:
 	gtkwave tb.gtkw
+
+# Запуск с логированием в tb.log
 runlog:
 	./tb -d > tb.log
+
+# Логирование, но остановка на int3
 int3:
 	./tb -t > tb.log
+
 run:
 	./tb
+
 tbc: core.v icarus verilate
 	g++ -o tb -I$(VRL) $(VRL)/verilated.cpp tb.cc \
 		obj_dir/Vvga__ALL.a \

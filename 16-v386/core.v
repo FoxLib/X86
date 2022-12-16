@@ -41,9 +41,10 @@ if (reset_n == 1'b0) begin
     ss          <= 16'h000;
     eip         <= 20'hF8000;
     eflags      <= 2'h2;
-    __segment   <= 80'hF800;
+    adsize      <= defsize;
     __adsize    <= defsize;
     __opsize    <= defsize;
+    __segment   <= 16'h0000;
     __override  <= 1'b0;
     __rep       <= 1'b0;
     __opext     <= 1'b0;
@@ -126,15 +127,13 @@ else case (t)
                     // FWAIT, NOP
                     8'h9B, 8'h90: begin t <= fetch; end
 
-                    // *ALU* modrm; XCHG modrm; ESC
+                    // <ALU> modrm; XCHG modrm; ESC
                     8'b00xx_x0xx,
                     8'b1000_011x,
                     8'b1101_1xxx: begin t <= fetch_modrm; end
 
-                    // *ALU* a,imm
-                    // JMP|CALL far seg:off
-                    8'b00xx_x101,
-                    8'b1001_1010,
+                    8'b00xx_x101, // <ALU> a, imm
+                    8'b1001_1010, // JMP|CALL far seg:off
                     8'b1110_1010: begin t <= fetch_imm16; end
 
                     // RET/RETF imm
@@ -1014,9 +1013,10 @@ else case (t)
             // Выставить операнды на вычисление
             0: begin
     
+                fn  <= 1;
                 op1 <= size ? (opsize ? eax : eax[15:0]) : eax[7:0];
                 op2 <= size ? (opsize ? wb  : wb[15:0]) : in;
-                fn  <= 1;
+    
                 if (size == 0) eip <= eip_next;
     
             end
@@ -2088,8 +2088,8 @@ localparam
 
 // REAL-MODE
 assign address =
-    src ? {segment[15:0], 4'h0} + (adsize ? ea[31:0] : ea[15:0]) :
-          {     cs[15:0], 4'h0} + eip[15:0];
+    src ? {segment, 4'h0} + (adsize ? ea  :  ea[15:0]) :
+          {     cs, 4'h0} + (adsize ? eip : eip[15:0]);
 
 initial begin
 
@@ -2163,7 +2163,7 @@ reg         __adsize        = 1'b0;
 reg         __opsize        = 1'b0;
 reg         __override      = 1'b0;
 reg [1:0]   __rep           = 2'b00;
-reg [15:0]  __segment       = 16'hF800;
+reg [15:0]  __segment       = 16'h0000;
 
 // -----------------------------------------------------------------------------
 // Модуль деления op1 / op2 -> divres | divrem
@@ -2283,10 +2283,11 @@ wire [32:0] alu_r =
                      op1 - op2; // SUB, CMP
 
 wire [ 4:0] alu_top = size ? (opsize ? 31 : 15) : 7;
+wire [ 5:0] alu_up  = alu_top + 1'b1;
 
 wire is_add  = alu == alu_add || alu == alu_adc;
 wire is_lgc  = alu == alu_xor || alu == alu_and || alu == alu_or;
-wire alu_cf  = alu_r[alu_top + 1'b1];
+wire alu_cf  = alu_r[alu_up];
 wire alu_af  = op1[4] ^ op2[4] ^ alu_r[4];
 wire alu_sf  = alu_r[alu_top];
 wire alu_zf  = size ? (opsize ? ~|alu_r[31:0] : ~|alu_r[15:0]) : ~|alu_r[7:0];

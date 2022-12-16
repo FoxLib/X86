@@ -120,7 +120,7 @@ always @(posedge clock) begin
     // Появился вызов прерывания с клавиатуры
     // -----------------------------------------------------------------
 
-    if (keyb_intr_latch ^  keyb_intr) begin
+    if (keyb_intr_latch ^ keyb_intr) begin
 
         keyb_intr_latch <= keyb_intr;
         if (irq_mask[1] == 0) irq_pend[1] <= 1;
