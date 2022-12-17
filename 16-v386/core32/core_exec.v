@@ -1055,8 +1055,6 @@ exec: casex (opcode)
 
     end
 
-    //
-
     // UNEXPECTED INSTRUCTION
     default: begin end
 
