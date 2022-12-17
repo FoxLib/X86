@@ -14,7 +14,7 @@ wave:
 	gtkwave tb.gtkw
 
 # Запуск с логированием в tb.log
-runlog:
+log:
 	./tb -d > tb.log
 
 # Логирование, но остановка на int3

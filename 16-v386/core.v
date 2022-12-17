@@ -412,6 +412,9 @@ else case (t)
                     // Групповые инструкции
                     8'b1111_x11x: begin t <= fetch_modrm; t_next <= exec; dir <= 1'b0; end
 
+                    // CMOV<cc> r,rm
+                    9'b1_0100_xxxx: begin t <= fetch_modrm; dir <= 1'b1; end
+
                     // Все оставшиеся
                     default: t <= exec;
 
@@ -2038,6 +2041,20 @@ else case (t)
             3'b111: t <= exception;
     
         endcase
+    
+        // CMOV<cc> r, rm
+        9'b1_0100_xxxx: begin
+    
+            if (branches[ opcode[3:1] ] != opcode[0]) begin
+    
+                t  <= modrm_wb;
+                wb <= op2;
+    
+            end else begin src <= 0; t <= fetch; end
+    
+        end
+    
+        //
     
         // UNEXPECTED INSTRUCTION
         default: begin end

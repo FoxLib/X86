@@ -134,7 +134,7 @@ public:
             fseek(fp, 0, SEEK_END);
             int size = ftell(fp);
             fseek(fp, 0, SEEK_SET);
-            fread(memory + 0x100000 - size, 1, size, fp);
+            fread(memory + 0xF8000, 1, size, fp);
             fclose(fp);
 
         } else {

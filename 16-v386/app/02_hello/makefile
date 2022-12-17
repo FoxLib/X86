@@ -1,6 +1,6 @@
 CC=clang
 # gcc -mgeneral-regs-only
-COPT=-Os -ffreestanding -fno-pie -nostdlib -m32  -mno-sse -mno-mmx -I../../include
+COPT=-Os -I../../include -ffreestanding -fno-pie -nostdlib -m32 -mno-sse -mno-mmx
 DEPS=nasm.o main.o
 ROOT=../..
 

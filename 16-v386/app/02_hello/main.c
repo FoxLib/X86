@@ -1,5 +1,7 @@
 #include <io.h>
 
+static const char test[4] = {15, 15, 2, 4};
+
 int main() {
 
     cli;
@@ -8,16 +10,11 @@ int main() {
 
     char* m = (char*) 0xa0000;
 
-    int n = 0;
-
     for (;;) {
+        for (int i = 0; i < 4; i++) {
 
-        for (int y = 0; y < 256; y++)
-        for (int x = 0; x < 256; x++) {
-            m[y*320+x] = x+y+n;
+            m[i] = test[i];
         }
-
-        n++;
     }
 
     for(;;);

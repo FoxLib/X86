@@ -282,8 +282,8 @@ public:
 
         eip = address & max_memory;
 
-        int  ereg = 0;
-        int  emem = 0;
+        int  ereg = 1;
+        int  emem = 1;
         int  stop = 0;
         char dis_pf[8];
         char dis_cmd [32];
